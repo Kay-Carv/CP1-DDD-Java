@@ -26,15 +26,47 @@ public class Exercicio {
         //3. Escreva um programa que leia dois números e mostre todos os números inteiros entre eles.
         int num1 = 10;
         int num2 = 20;
-        System.out.println("=== Quantidade de números inteiros entre " + num1 + " e " + num2+ " ===");
+        System.out.println("=== Todos os números inteiros entre " + num1 + " e " + num2+ " ===");
         while (num1 < num2 - 1) {
             num1 ++;
             System.out.println(num1);
         }
-        System.out.println("\n===");
+        System.out.println("===");
 
-        //Crie uma função que receba um número inteiro e retorne seu fatorial. Teste no main.
+        //Ex.4 Crie uma função que receba um número inteiro e retorne seu fatorial. Teste no main.
 
-        scanner.close();
+        System.out.println("\n=== Digite um número inteiro para saber o seu fatorial ===");
+        int numFatorial = scanner.nextInt();
+
+        System.out.println("O fatorial de " + numFatorial + " equivale a " + calcularFatorial(numFatorial));
+
+        System.out.println("Escreva um número inteiro para a tabuada");
+        int numTabuada = scanner.nextInt();
+        tabuada(numTabuada);
+
+
+        scanner.close();    //Fechando Scanner
     }
+
+    static int calcularFatorial (int numero ) {
+        if (numero == 0 ) {
+            return 1;
+        }
+        if (numero < 0 ) {
+            return -1;
+        }
+        int resultado = 1;
+        for ( int numfatorado = 1;  numfatorado <= numero ; numfatorado++){
+            resultado *= numfatorado;
+        }
+        return resultado;
+    }
+
+    //Ex.06 Crie uma função que receba um número inteiro e mostre a tabuada desse número até 10.
+    static void tabuada (int numeroInt) {
+        for ( int i = 1; i <= 10; i++) {
+            int calculoTabuada = i * numeroInt;
+            System.out.println( i + " X " + numeroInt + " = " + calculoTabuada );
+            }
+        }
 }
