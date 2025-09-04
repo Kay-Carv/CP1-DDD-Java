@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Exercicio {
@@ -149,8 +150,10 @@ public class Exercicio {
     public static class exercicio10 {
         public static void main(String[] args) {
             System.out.println("===Programa para calcular desconto===");
+            DecimalFormat df = new DecimalFormat("#.00");
             Scanner scanner = new Scanner(System.in);
-            double valor = 2000;
+            System.out.println("Digite o valor da compra: ");
+            double valor = scanner.nextDouble();
             System.out.println("O valor da compra é de " + valor + " reais");
             System.out.println("Selecione a forma de pagamento (digite um número entre 1 e 3 para selecionar):\n Digite ( 1 ) para pagamento a vista;\n Digite ( 2 ) para parcelar em 2 vezes;\n Digite ( 3 ) para parcelar em 4 vezes com 8% de juros;");
             int opcao = scanner.nextInt();
@@ -159,15 +162,22 @@ public class Exercicio {
             while (looping) {
                 switch (opcao) {
                     case 1 -> {
-                        System.out.println("O valor de " + valor + " a vista terá um descosto de 10% e será pago por " + valor * 0.9 + " reais");
+                        System.out.println("\nPagamento a vista (10% de desconto): ");
+                        System.out.println("O valor de R$" + df.format(valor));
+                        System.out.println("Desconto de 10%: R$" + df.format(valor * 0.1));
+                        System.out.println("Valor final: R$" + df.format(valor * 0.9 ));
                         looping = false;
                     }
                     case 2 -> {
-                        System.out.println("O valor de " + valor + " será pago em 2 vezes de " + (double)valor/2 + " reais sem juros");
+                        System.out.println("\nPagamento em 2 parcelas:");
+                        System.out.println("O valor de R$" + df.format(valor) + " será pago em 2 vezes de R$" + df.format(valor / 2) + " sem juros");
+                        System.out.println("Valor final: R$" + df.format(valor));
                         looping = false;
                     }
                     case 3 -> {
-                        System.out.println("O valor de " + valor + " será pago em 4 vezes de " + (double)(valor * 1.08)/4 + " reais com juros de " + (valor * 0.08 /4) + " reais por parcela.");
+                        System.out.println("\nPagamento em 4 parcelas:");
+                        System.out.println("O valor de R$" + df.format(valor) + " será pago em 4 vezes de R$" + df.format(valor * 1.08 /4) + " com juros de R$" + df.format(valor * 0.08 /4) + " por parcela.");
+                        System.out.println("Valor final: R$" + df.format(valor * 1.08));
                         looping = false;
                     }
                     default -> {
@@ -176,6 +186,133 @@ public class Exercicio {
                     }
                 }
             }
+        }
+    }
+    //Ex.11	Crie um programa que leia o nome e a idade de 3 pessoas. Ao final, mostre o nome da pessoa mais velha.
+    public static class exercicio11 {
+        public static void main(String[] args){
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("===Sistema para saber a pessoa mais velha dentre 3===\n");
+            String[] nomes = new String[3];
+            int[] idades = new int[3];
+
+            for (int i = 0; i < 3; i++) {
+                System.out.println("Digite o nome da "+ (1+ i) + "° pessoa!");
+                nomes[i] = scanner.nextLine();
+
+                System.out.println("Digite a idade da "+ (1+ i) + "° pessoa!");
+                idades[i] = scanner.nextInt();
+                scanner.nextLine();
+            }
+            int idadeMaisVelha = -1;
+            String nomeMaisVelho = "";
+
+            for (int i = 0; i < 3; i++) {
+                if (idades[i] > idadeMaisVelha) {
+                    idadeMaisVelha = idades[i];
+                    nomeMaisVelho = nomes[i];
+                }
+            }
+
+            System.out.println("\n--------------------");
+            System.out.println("A pessoa mais velha é: " + nomeMaisVelho);
+            System.out.println("Com a idade de: " + idadeMaisVelha + " anos");
+            scanner.close();
+        }
+    }
+
+    //Ex.12 Escreva um programa que leia a altura, o comprimento e a largura de uma caixa, e calcule o seu volume
+    public static class exercicio12 {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("===Calcular volume de uma caixa===");
+
+            System.out.println("Digite a altura: ");
+            double altura = scanner.nextDouble();
+            System.out.println("Digite o comprimento: ");
+            double comprimento = scanner.nextDouble();
+            System.out.println("Digite a largura: ");
+            double largura = scanner.nextDouble();
+
+            System.out.println("O volume da caixa é: "+ calcularVolume(altura, comprimento, largura));
+
+            scanner.close();
+        }
+
+        public static double calcularVolume(double a, double b, double c){
+            return a * b * c;
+        }
+    }
+
+    //13)	Crie uma classe chamada Car com os atributos: brand, model, year. No main, crie dois objetos da classe e exiba as informações.
+
+    static class Car {
+        String brand, model;
+        int year;
+    }
+    public static class exercicio13{
+        public static void main(String[] args) {
+            Car car1 = new Car();
+            car1.brand = "Mercedes-Benz";
+            car1.model = "CLS 450";
+            car1.year = 2019;
+
+            Car car2 = new Car();
+            car2.brand = "HONDA";
+            car2.model = "Civic Type R";
+            car2.year = 2025;
+
+            System.out.println("Carros 1: ");
+            System.out.println("Marca: " + car1.brand);
+            System.out.println("Modelo: "+ car1.model);
+            System.out.println("Ano: " + car1.year);
+
+            System.out.println("\nCarro 2: ");
+            System.out.println("Marca: " + car2.brand);
+            System.out.println("Modelo: "+ car2.model);
+            System.out.println("Ano: " + car2.year);
+        }
+    }
+
+
+    //Ex.14 Escreva uma função que receba a temperatura em Fahrenheit e retorne em Celsius.
+    public static class exercicio14 {
+        public static void main(String[] args) {
+            System.out.println("===Sistema para converter Fahrenheit em Celsius===");
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("\nEscreva a temperatura em Fahrenheit ( F° ) que será convertida em Celsius ( C° ): ");
+            double fahrenheit = scanner.nextDouble();
+
+            double celsius = converterFahrenheit(fahrenheit);
+
+            //Definindo formato do decimal
+            DecimalFormat df = new DecimalFormat("#.##");
+
+            System.out.println(fahrenheit + "F° equivalem a " + df.format(celsius) + "°C");
+
+            scanner.close();
+        }
+        public static double converterFahrenheit(double f){
+            return ((f- 32) * 5 / 9);
+        }
+    }
+    //Ex.15 Crie um programa que leia um número inteiro e exiba uma contagem regressiva até 0.
+
+    public static class exercicio15 {
+        public static void main (String[] args) {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("===Sistema de contagem regressiva===");
+            System.out.println("\nEscreva um número para a contagem regressiva: \n");
+            int num = scanner.nextInt();
+
+            for (int i = num; i >= 0; i--) {
+                System.out.println(i);
+            }
+            System.out.println("\n-----------");
         }
     }
 }
