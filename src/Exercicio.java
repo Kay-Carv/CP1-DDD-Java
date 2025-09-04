@@ -89,6 +89,33 @@ public class Exercicio {
         }
     }
 
+    // 5. Escreva um programa que leia 10 números inteiros e calcule quantos são pares e quantos são ímpares.
+    public static class exercicio5 {
+        public static void main(String[] args) {
+            System.out.println("=== Sistema para contabilizar a quantidade de números impares e pares ===");
+            Scanner scanner = new Scanner(System.in);
+
+            int pares = 0;
+            int impares = 0;
+            int qtd_numbers = 10;
+
+            for (int i = 1; i <=  qtd_numbers; i++){
+                System.out.println("Escreva o " + i + "° número");
+                int numero = scanner.nextInt();
+                if (numero % 2 == 0){
+                    pares ++;
+                } else {
+                    impares ++;
+                }
+            }
+
+            System.out.println("\nQuantidade de números pares: " + pares);
+            System.out.println("Quantidade de números impares: " + impares);
+
+            scanner.close();
+        }
+    }
+
     //Ex.06 Crie uma função que receba um número inteiro e mostre a tabuada desse número até 10.
 
     public static class exercicio6 {
@@ -110,7 +137,7 @@ public class Exercicio {
             }
     }
 
-    //7)	Crie uma função que receba dois números e retorne o maior deles.
+    // Ex.7	Crie uma função que receba dois números e retorne o maior deles.
     public static class Exercicio7  {
         public static void main(String[] args) {
             int numero1 = 10;
@@ -121,11 +148,8 @@ public class Exercicio {
             System.out.println("Entre " + numero1 + " e " + numero2+ " o maior número é o " + maiorNumero);
         }
         public static int comparaDoisNum(int num1, int num2){
-            if (num1 > num2) {
-                return num1;
-            } else {
-                return num2;
-            }
+            int max = Math.max(num1, num2);
+            return max;
         }
     }
 
@@ -135,10 +159,11 @@ public class Exercicio {
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("\n===Programa para cálculo de IMC===");
-            System.out.println("Insira a altura");
+            System.out.println("Insira a altura em metros: ");
             double altura = scanner.nextDouble();
 
-            System.out.println("Insira o valor de KG da pessoa");
+            System.out.println("Insira o valor de KG da pessoa: ");
+
             double peso = scanner.nextDouble();
 
             calcularIMC(altura, peso);
@@ -146,18 +171,25 @@ public class Exercicio {
             scanner.close();
         }
 
-        public static void calcularIMC( double altura, double peso ){
-            double imc = peso / Math.pow(altura, 2);
+        public static void calcularIMC(double altura, double peso) {
+            DecimalFormat df = new DecimalFormat("#.##");
 
-            System.out.println("Com a altura de " + altura + " metros e o peso de " + peso + "kg o seu IMC é de " + imc);
-            if (imc <= 18.5 ) {
-                System.out.println("Está abaixo do peso ideal");
-            } else if ( imc > 18.5 && imc <= 24.9) {
-                System.out.println("Está com o peso normal");
-            } else if ( imc > 24.9 && imc < 30 ) {
-                System.out.println("Está com sobre peso");
-            } else if (imc >= 30) {
-                System.out.println("Está com obesidade");
+            double imc = peso / Math.pow(altura, 2);
+            String imcFormatado = df.format(imc);
+
+            System.out.println("\n--- Resultado do IMC ---");
+            System.out.println("Altura: " + altura + "m | Peso: " + peso + "kg");
+            System.out.println("Seu IMC é: " + imcFormatado);
+
+            System.out.print("Classificação: ");
+            if (imc <= 18.5) {
+                System.out.println("Abaixo do peso ideal");
+            } else if (imc > 18.5 && imc <= 24.9) {
+                System.out.println("Peso normal");
+            } else if (imc > 24.9 && imc < 30) {
+                System.out.println("Sobrepeso");
+            } else { // Simplificado para capturar IMC >= 30
+                System.out.println("Obesidade");
             }
         }
     }
@@ -175,7 +207,10 @@ public class Exercicio {
             System.out.println("Digite o terceiro valor: ");
             int num3 = scanner.nextInt();
 
-            System.out.println("A média desses valores é igual a: " + calcularMediraAritimetrica(num1, num2, num3));
+            double media = calcularMediraAritimetrica(num1, num2, num3);
+            DecimalFormat df = new DecimalFormat("#.##");
+
+            System.out.println("A média desses valores é igual a: " + df.format(media));
 
             scanner.close();
         }
